@@ -10,7 +10,7 @@
     <h1>Multishare</h1>
     <p><%= new Date() %></p>
     
-    <div class="display-screen centered">
+    <div class="display-screen">
         <video id="videoPlayer" controls autoplay></video>
     </div> 
     <div class="other-videos centered">
@@ -21,15 +21,21 @@
     </div>
 
     <style>
+        body{
+            background-color: #1e1e1e;
+            color: aliceblue;
+            padding-left: 12vw;
+            padding-right: 12vw;
+        }
         
         .centered{
             margin-left: auto;
             margin-right: auto;
-            width: 80vw;
         }
         .display-screen{
             background-color: black;
             height: 85vh;
+            width: 100%;
             display: flex;
             align-items: center;
 
@@ -51,6 +57,22 @@
         .video-option{
             background-color: black;
             height: 250px;
+            cursor: pointer;
+            padding-top: 1rem;
+            border-radius: 10px;
+        }
+        .video-option:hover{
+            transition: all 90ms;
+            border: solid 2px #fefefe;
+        }
+
+        .video-option p{
+            text-align: center;
+        }
+        .video-option img{
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
         }
 
 
@@ -64,6 +86,7 @@
         function playVideo(title){
             console.log("title")
         }
+
         
 
         //!
@@ -77,16 +100,15 @@
                     videoOption.classList.add('video-option');
 
                     const videoImage = document.createElement('img');
-                    videoImage.src = '/api/thumbnail'; // Adjust the path to your thumbnails
+                    const thumbnailLocation = `${videotitle.split('.')[0]}_thumbnail.jpg`
+                    videoImage.src = `/api/thumbnail/${thumbnailLocation}`; // Adjust the path to your thumbnails
 
-                    const overlay = document.createElement('div');
-                    overlay.classList.add('overlay');
+
 
                     const videoTitle = document.createElement('p');
-                    videoTitle.textContent = videotitle;
+                    videoTitle.textContent = videotitle.split('.')[0];
 
                     videoOption.appendChild(videoImage);
-                    videoOption.appendChild(overlay);
                     videoOption.appendChild(videoTitle);
                     
                     videoOption.addEventListener(

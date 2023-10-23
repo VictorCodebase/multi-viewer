@@ -1,15 +1,16 @@
-const http = require('http');
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const { Stream } = require('stream');
 const path = require('path');
+const { exec } = require('child_process');
+const { stderr, title } = require('process');
 
 app.set('view engine', 'ejs');
 
 
 videoPath = './videos/Forza Horizon 5 2022-08-01 21-58-50.mp4'
 const videoFolder = './videos'
+const thumbnailFolder = './thumbnails'
 
 app.get('/api/video_list', (req, res) => {
     fs.readdir(videoFolder, (err, files) => {
@@ -21,10 +22,126 @@ app.get('/api/video_list', (req, res) => {
     })
 })
 
-app.get('/api/:thumbnail/', (req, res) => {
-    //TODO: send image to client
+app.get('/api/thumbnail/:thumbnail', (req, res) => {
+    //TODO: check if thumbnails exist for all videos and dispose excess thumbnails
+    const thumbnail = req.params.thumbnail
+    const thumbnailPath = path.resolve(path.join(thumbnailFolder, thumbnail))
+    console.log("PATH: ",thumbnailPath)
+    res.sendFile(thumbnailPath, (err) => {
 
+        if(err){
+            console.error(err)
+            //can we capture a 404 error and run the checkThumbnails function to troubleshoot?
+            console.log("thumbnail not found, running checkThumbnails")
+            if(checkThumbnails()){
+                console.log("thumbnail added successfully")
+                res.sendFile(thumbnailPath)
+            }else{
+                res.status(404).send(`Thumbnail ${thumbnail} not found`)
+            }
+        }
+    
+    })
 })
+    
+    
+
+function checkThumbnails(){
+    const videoTitles = new Set()
+    const videoThumbnails = new Set()
+    errorSolved = false
+    fs.readdir(videoFolder, (err, files) => {
+        if(err){
+            console.log(err)
+        }
+        files.forEach(file => {
+            file = file.split('.')[0]
+            videoTitles.add(file)
+        });
+        fs.readdir(thumbnailFolder, (err, titles) => {
+            if(err){
+                console.log(err)
+            }
+            titles.forEach(title => {
+                console.log(title)
+                title = title.split('_')[0]
+                videoThumbnails.add(title)
+            
+            });
+        })
+
+        videosWithoutThumbnails = [...videoTitles].filter(x => !videoThumbnails.has(x))
+        console.log("No thumbnails", videosWithoutThumbnails)
+        thumbnailsWithNoVideos = [...videoThumbnails].filter(x => !videoTitles.has(x))
+        console.log(thumbnailsWithNoVideos)
+
+        if (videosWithoutThumbnails.length > 0){
+            console.log('adding thumbnails')
+            if(addThumbnails(videosWithoutThumbnails)){
+                errorSolved = true
+            }
+        }
+        if (thumbnailsWithNoVideos.length > 0){
+            console.log('deleting unrelated thumbnails')
+            deleteThumbnails(thumbnailsWithNoVideos)
+        }        
+    })
+       
+}
+
+function deleteThumbnails(thumbnails){
+    thumbnails.forEach(thumbnail => {
+        fs.unlink(thumbnail, (err) => {
+            if(err){
+                console.log(err)
+            }
+            else{
+                console.log(`deleted ${thumbnail}`)
+            }
+        })
+    })
+}
+
+function addThumbnails(videos){
+    videos.forEach(video => {
+        const videoPath = `${videoFolder}/${video}.mp4`;
+        const thumbnailPath = `${thumbnailFolder}/${video}_thumbnail.jpg`;
+        const command = `ffmpeg -i "${videoPath}" -ss 00:00:05 -vframes 1 "${thumbnailPath}"`;
+        
+        exec(command, (error, stdout, stderr) => {
+            if (error){
+                console.error(`Error generating thumbnail for ${video}: ${error}`);
+            }else{
+                console.log(`thumbail generated for ${video} successfully`)
+            }
+        })
+    })
+}
+
+
+function generateThumbnails(videos){
+    fs.readdir(videoFolder, (err, files) => {
+        if (err){
+            console.log(err)
+            return
+        }
+        files.forEach(file =>{
+            if(file.endsWith('.mp4')){
+                const videoPath = `${videoFolder}/${file}`;
+                const thumbnailPath = `${videoFolder}/${file.replace('.mp4', '_thumbnail.jpg')}`;
+                const command = `ffmpeg -i "${videoPath}" -ss 00:00:05 -vframes 1 "${thumbnailPath}"`;
+                
+                exec(command, (error, stdout, stderr) => {
+                    if (error){
+                        console.error(`Error generating thumbnail for ${file}: ${error}`);
+                    }else{
+                        console.log(`thumbail generated for ${file} successfully`)
+                    }
+                })
+            }
+        })
+    })
+}
 
 app.get('/api/stream/:video', (req, res) => {
     videoName = req.params.video
