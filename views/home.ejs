@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Multishare</h1>
+    <p><%= new Date() %></p>
+    
+    <div class="display-screen">
+        <video id="videoPlayer" controls autoplay></video>
+    </div> 
+
+    <style>
+        
+        .display-screen{
+            background-color: black;
+            width: 80vw;
+            height: 75vh;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        video{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer')
+
+        videoTitle = "default"
+
+        videoPlayer.src = '/api/stream'
+
+    </script>
+</body>
+</html>
