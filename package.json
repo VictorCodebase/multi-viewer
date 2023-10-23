@@ -1,0 +1,19 @@
+{
+  "name": "multiviewer",
+  "version": "1.0.0",
+  "description": "Watch videos as a party",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorCodebase/multi-viewer.git"
+  },
+  "author": "Mark Victor Kithinji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictorCodebase/multi-viewer/issues"
+  },
+  "homepage": "https://github.com/VictorCodebase/multi-viewer#readme"
+}
