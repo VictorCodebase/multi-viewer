@@ -1,14 +1,39 @@
 const http = require('http');
 const express = require('express');
 const app = express();
-const fs = require('fs')
+const fs = require('fs');
+const { Stream } = require('stream');
+const path = require('path');
 
 app.set('view engine', 'ejs');
 
 
-const videoPath = './videos/sample1.mp4'
+videoPath = './videos/Forza Horizon 5 2022-08-01 21-58-50.mp4'
+const videoFolder = './videos'
 
-app.get('/api/stream', (req, res) => {
+app.get('/api/video_list', (req, res) => {
+    fs.readdir(videoFolder, (err, files) => {
+        if(err){
+            console.error(err)
+            return res.status(500).send(`Error reading video files from ${videoFolder}`)
+        }
+        res.json(files)
+    })
+})
+
+app.get('/api/:thumbnail/', (req, res) => {
+    //TODO: send image to client
+
+})
+
+app.get('/api/stream/:video', (req, res) => {
+    videoName = req.params.video
+    console.log(`Fetched ${videoName}`)
+    if (videoName === undefined || videoName === NaN){
+        console.log(`unexpected title: ${videoName}`) 
+    }else{
+        videoPath = (videoName.includes('.mp4')) ? path.join(videoFolder, videoName) : path.join(videoFolder, videoName + '.mp4')
+    }
     const stat = fs.statSync(videoPath);
     const fileSize = stat.size;
     const range = req.headers.range;

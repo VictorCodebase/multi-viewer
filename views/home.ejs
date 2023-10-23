@@ -3,38 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/style.css">
+    <!-- //<link rel="stylesheet" href="/styling/style.css"> -->
     <title>Document</title>
 </head>
 <body>
     <h1>Multishare</h1>
     <p><%= new Date() %></p>
     
-    <div class="display-screen">
+    <div class="display-screen centered">
         <video id="videoPlayer" controls autoplay></video>
     </div> 
+    <div class="other-videos centered">
+        <div id="video-grid">
+            
+          </div>
+              
+    </div>
 
     <style>
         
-        .display-screen{
-            background-color: black;
-            width: 80vw;
-            height: 75vh;
+        .centered{
             margin-left: auto;
             margin-right: auto;
+            width: 80vw;
+        }
+        .display-screen{
+            background-color: black;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+
         }
         video{
-            height: 100%;
+            display: none;
             width: 100%;
         }
+        .other-videos{
+            min-height: 300px;
+            margin-top: 100px;
+        }
+        #video-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(2, auto);
+          gap: 10px;
+        }
+        .video-option{
+            background-color: black;
+            height: 250px;
+        }
+
+
     </style>
 
     <script>
         const videoPlayer = document.getElementById('videoPlayer')
-
+        const videoGrid = document.getElementById('video-grid')
+        
         videoTitle = "default"
+        function playVideo(title){
+            console.log("title")
+        }
+        
 
-        videoPlayer.src = '/api/stream'
+        //!
+
+       //document.getElementById('video-grid').appendChild('div');
+        fetch('/api/video_list')
+            .then(response => response.json())
+            .then(videolist => {
+                videolist.forEach(videotitle => {
+                    const videoOption = document.createElement('div');
+                    videoOption.classList.add('video-option');
+
+                    const videoImage = document.createElement('img');
+                    videoImage.src = '/api/thumbnail'; // Adjust the path to your thumbnails
+
+                    const overlay = document.createElement('div');
+                    overlay.classList.add('overlay');
+
+                    const videoTitle = document.createElement('p');
+                    videoTitle.textContent = videotitle;
+
+                    videoOption.appendChild(videoImage);
+                    videoOption.appendChild(overlay);
+                    videoOption.appendChild(videoTitle);
+                    
+                    videoOption.addEventListener(
+                        'click', function(){
+                            videoPlayer.style.display = "block"
+                            videoPlayer.src = `/api/stream/${encodeURIComponent(videotitle)}`
+                        }
+                    )
+                videoGrid.appendChild(videoOption);
+                });
+            })
+            .catch(error =>{
+                console.error(error)
+            })
 
     </script>
 </body>
