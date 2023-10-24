@@ -39,11 +39,20 @@ app.get('/api/video_list', (req, res) => {
     })
 })
 
+app.get('/api/logo', (req, res) => {
+    const logoPath = req.query.logoPath
+    const newLogoPath = path.resolve(path.join(__dirname, 'public', 'images', 'logo.png'))
+    res.sendFile(newLogoPath)
+})
+app.get('/api/logo_small', (req, res) => {
+    const logoPath = path.resolve(path.join(__dirname, 'public', 'images', 'logo_small.png'))
+    res.sendFile(logoPath)
+})
+
 app.get('/api/thumbnail/:thumbnail', (req, res) => {
     //TODO: check if thumbnails exist for all videos and dispose excess thumbnails
     const thumbnail = req.params.thumbnail
     const thumbnailPath = path.resolve(path.join(thumbnailFolder, thumbnail))
-    console.log("PATH: ",thumbnailPath)
     res.sendFile(thumbnailPath, (err) => {
 
         if(err){

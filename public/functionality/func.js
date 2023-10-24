@@ -21,12 +21,13 @@ fetch('/api/video_list')
             const videoImage = document.createElement('img');
             const thumbnailLocation = `${videotitle.split('.')[0]}_thumbnail.jpg`
             videoImage.src = `/api/thumbnail/${thumbnailLocation}`; // Adjust the path to your thumbnails
-
+            const linkToScreen = document.createElement('a')
+            linkToScreen.href = '#videoPlayer'
 
 
             const videoTitle = document.createElement('p');
             videoTitle.textContent = videotitle.split('.')[0];
-
+            linkToScreen.appendChild(videoOption);
             videoOption.appendChild(videoImage);
             videoOption.appendChild(videoTitle);
             
@@ -36,7 +37,7 @@ fetch('/api/video_list')
                     videoPlayer.src = `/api/stream/${encodeURIComponent(videotitle)}`
                 }
             )
-        videoGrid.appendChild(videoOption);
+        videoGrid.appendChild(linkToScreen);
         });
     })
     .catch(error =>{

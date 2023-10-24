@@ -5,18 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/images/panda-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="/styling/style.css">
-    <title>MultiViewer</title>
+    <link rel="stylesheet" href="/codebaseBranding/brand.css">
+    <title>Multi-Viewer</title>
 </head>
 <body>
-    <div id="header">
-    </div>
+    <header></header>
+    <main>
+        <div class="display-screen">
+            <video id="videoPlayer" controls autoplay></video>
+        </div> 
+        <div class="other-videos centered">
+            <div id="video-grid"></div>       
+        </div>  
+    </main>
+    <footer></footer>
 
-    <div class="display-screen">
-        <video id="videoPlayer" controls autoplay></video>
-    </div> 
-    <div class="other-videos centered">
-        <div id="video-grid"></div>       
-    </div>
+
 
 
 <script src="/functionality/func.js"></script>

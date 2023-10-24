@@ -1,8 +1,18 @@
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: #1e1e1e;
     color: aliceblue;
+}
+a{
+    text-decoration: none;
+    color: #fefefe;
+}
+main{
     padding-left: 12vw;
     padding-right: 12vw;
+    font-family:'Trebuchet MS', sans-serif;
 }
 
 .centered{
@@ -40,6 +50,7 @@ video{
 }
 .video-option:hover{
     transition: all 90ms;
+    height: 245px;
     border: solid 2px #fefefe;
 }
 
@@ -50,4 +61,18 @@ video{
     width: 100%;
     height: 70%;
     object-fit: cover;
+}
+
+
+@media screen and (max-width:700px){
+   #video-grid{
+       grid-template-columns: repeat(1, 1fr);
+   }
+   main{
+    padding-left: 1rem;
+    padding-right: 1rem;
+   }
+   .display-screen{
+    height: 40vh;
+   } 
 }
