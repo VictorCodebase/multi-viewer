@@ -3,127 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- //<link rel="stylesheet" href="/styling/style.css"> -->
-    <title>Document</title>
+    <link rel="shortcut icon" href="/images/panda-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/styling/style.css">
+    <title>MultiViewer</title>
 </head>
 <body>
-    <h1>Multishare</h1>
-    <p><%= new Date() %></p>
-    
+    <div id="header">
+    </div>
+
     <div class="display-screen">
         <video id="videoPlayer" controls autoplay></video>
     </div> 
     <div class="other-videos centered">
-        <div id="video-grid">
-            
-          </div>
-              
+        <div id="video-grid"></div>       
     </div>
 
-    <style>
-        body{
-            background-color: #1e1e1e;
-            color: aliceblue;
-            padding-left: 12vw;
-            padding-right: 12vw;
-        }
-        
-        .centered{
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .display-screen{
-            background-color: black;
-            height: 85vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
 
-        }
-        video{
-            display: none;
-            width: 100%;
-        }
-        .other-videos{
-            min-height: 300px;
-            margin-top: 100px;
-        }
-        #video-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          grid-template-rows: repeat(2, auto);
-          gap: 10px;
-        }
-        .video-option{
-            background-color: black;
-            height: 250px;
-            cursor: pointer;
-            padding-top: 1rem;
-            border-radius: 10px;
-        }
-        .video-option:hover{
-            transition: all 90ms;
-            border: solid 2px #fefefe;
-        }
-
-        .video-option p{
-            text-align: center;
-        }
-        .video-option img{
-            width: 100%;
-            height: 70%;
-            object-fit: cover;
-        }
-
-
-    </style>
-
-    <script>
-        const videoPlayer = document.getElementById('videoPlayer')
-        const videoGrid = document.getElementById('video-grid')
-        
-        videoTitle = "default"
-        function playVideo(title){
-            console.log("title")
-        }
-
-        
-
-        //!
-
-       //document.getElementById('video-grid').appendChild('div');
-        fetch('/api/video_list')
-            .then(response => response.json())
-            .then(videolist => {
-                videolist.forEach(videotitle => {
-                    const videoOption = document.createElement('div');
-                    videoOption.classList.add('video-option');
-
-                    const videoImage = document.createElement('img');
-                    const thumbnailLocation = `${videotitle.split('.')[0]}_thumbnail.jpg`
-                    videoImage.src = `/api/thumbnail/${thumbnailLocation}`; // Adjust the path to your thumbnails
-
-
-
-                    const videoTitle = document.createElement('p');
-                    videoTitle.textContent = videotitle.split('.')[0];
-
-                    videoOption.appendChild(videoImage);
-                    videoOption.appendChild(videoTitle);
-                    
-                    videoOption.addEventListener(
-                        'click', function(){
-                            videoPlayer.style.display = "block"
-                            videoPlayer.src = `/api/stream/${encodeURIComponent(videotitle)}`
-                        }
-                    )
-                videoGrid.appendChild(videoOption);
-                });
-            })
-            .catch(error =>{
-                console.error(error)
-            })
-
-    </script>
+<script src="/functionality/func.js"></script>
+<script src="/codebaseBranding/brand.js"></script>
 </body>
 </html>

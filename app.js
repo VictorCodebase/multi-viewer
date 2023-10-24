@@ -1,11 +1,28 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const http = require('http');
 const path = require('path');
 const { exec } = require('child_process');
 const { stderr, title } = require('process');
 
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+const server = http.createServer((req, res) => {
+    const filePath = path.join(__dirname, 'public', req.url);
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404);
+            res.end('File not found.');
+            return;
+        }
+        res.writeHead(200);
+        res.end(data);
+    });
+});
 
 
 videoPath = './videos/Forza Horizon 5 2022-08-01 21-58-50.mp4'
