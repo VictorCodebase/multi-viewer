@@ -53,18 +53,25 @@ app.get('/api/thumbnail/:thumbnail', (req, res) => {
     //TODO: check if thumbnails exist for all videos and dispose excess thumbnails
     const thumbnail = req.params.thumbnail
     const thumbnailPath = path.resolve(path.join(thumbnailFolder, thumbnail))
-    res.sendFile(thumbnailPath, (err) => {
+    res.sendFile(thumbnailPath, async (err)  => {
 
         if(err){
             console.error(err)
             //can we capture a 404 error and run the checkThumbnails function to troubleshoot?
             console.log("thumbnail not found, running checkThumbnails")
-            if(checkThumbnails()){
+            await checkThumbnails()
+            .then((res) => {
                 console.log("thumbnail added successfully")
                 res.sendFile(thumbnailPath)
-            }else{
+                console.log(res)
+                if (!res){
+                    console.log("thumbnail couldnt be generated")
+                }
+            })
+            .catch((err) => {
+                console.log(err)
                 res.status(404).send(`Thumbnail ${thumbnail} not found`)
-            }
+            })
         }
     
     })
@@ -76,43 +83,50 @@ function checkThumbnails(){
     const videoTitles = new Set()
     const videoThumbnails = new Set()
     errorSolved = false
-    fs.readdir(videoFolder, (err, files) => {
-        if(err){
-            console.log(err)
-        }
-        files.forEach(file => {
-            file = file.split('.')[0]
-            videoTitles.add(file)
-        });
-        fs.readdir(thumbnailFolder, (err, titles) => {
+    return new Promise((resolve, reject) => {
+        fs.readdir(videoFolder, (err, files) => {
             if(err){
                 console.log(err)
             }
-            titles.forEach(title => {
-                console.log(title)
-                title = title.split('_')[0]
-                videoThumbnails.add(title)
-            
+            files.forEach(file => {
+                file = file.split('.')[0]
+                videoTitles.add(file)
             });
-        })
+            fs.readdir(thumbnailFolder, (err, titles) => {
+                if(err){
+                    console.log(err)
+                }
+                titles.forEach(title => {
+                    console.log(title)
+                    title = title.split('_')[0]
+                    videoThumbnails.add(title)
+                
+                });
+            })
 
-        videosWithoutThumbnails = [...videoTitles].filter(x => !videoThumbnails.has(x))
-        console.log("No thumbnails", videosWithoutThumbnails)
-        thumbnailsWithNoVideos = [...videoThumbnails].filter(x => !videoTitles.has(x))
-        console.log(thumbnailsWithNoVideos)
+            videosWithoutThumbnails = [...videoTitles].filter(x => !videoThumbnails.has(x))
+            console.log("No thumbnails", videosWithoutThumbnails)
+            thumbnailsWithNoVideos = [...videoThumbnails].filter(x => !videoTitles.has(x))
+            console.log(thumbnailsWithNoVideos)
 
-        if (videosWithoutThumbnails.length > 0){
-            console.log('adding thumbnails')
-            if(addThumbnails(videosWithoutThumbnails)){
-                errorSolved = true
+            if (videosWithoutThumbnails.length > 0){
+                console.log('adding thumbnails')
+                if(addThumbnails(videosWithoutThumbnails)){
+                    errorSolved = true
+                }
             }
+            if (thumbnailsWithNoVideos.length > 0){
+                console.log('deleting unrelated thumbnails')
+                deleteThumbnails(thumbnailsWithNoVideos)
+            }        
+        })
+        if (errorSolved){
+            resolve(true)
         }
-        if (thumbnailsWithNoVideos.length > 0){
-            console.log('deleting unrelated thumbnails')
-            deleteThumbnails(thumbnailsWithNoVideos)
-        }        
+        else{
+            reject(false)
+        }
     })
-       
 }
 
 function deleteThumbnails(thumbnails){

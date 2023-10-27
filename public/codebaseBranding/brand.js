@@ -21,12 +21,12 @@ function constructHeader(){
     const logoDiv = document.createElement('div');
     logoDiv.id = 'logo';
 
-    const logoImgMobileDiv = document.createElement('div');
-    logoImgMobileDiv.classList.add('logoImgMobile');
+    //const logoImgMobileDiv = document.createElement('div');
+    //logoImgMobileDiv.classList.add('logoImgMobile');
 
-    const logoImgMobile = document.createElement('img');
-    logoImgMobile.src = logoPath;
-    logoImgMobile.alt = 'Logo';
+    // const logoImgMobile = document.createElement('img');
+    // logoImgMobile.src = logoPath;
+    // logoImgMobile.alt = 'Logo';
 
     const logoImgDiv = document.createElement('div');
     logoImgDiv.classList.add('logoImg');
@@ -51,10 +51,10 @@ function constructHeader(){
     const menuDiv = document.createElement('div');
     menuDiv.id = 'menu';
 
-    logoImgMobileDiv.appendChild(logoImgMobile);
+    //logoImgMobileDiv.appendChild(logoImgMobile);
     logoImgDiv.appendChild(logoUrl);
     logoUrl.appendChild(logoImg);
-    logoDiv.appendChild(logoImgMobileDiv);
+    //logoDiv.appendChild(logoImgMobileDiv);
     logoDiv.appendChild(logoImgDiv);
     titleDiv.appendChild(appTitleDiv);
 
@@ -71,33 +71,34 @@ function constructFooter(){
     footerContainer.classList.add('rows');
 
     // Create the first footer section
-    const footerSection1 = createFooterSection('Section 1', [
-      { src: '', alt: 'view on github' },
-      { src: '', alt: 'star project on github' },
-      { src: '', alt: 'get on microsoft store' },
+    const footerSection1 = createFooterSection('Contribution', [
+      {tag: 'p', html: 'We &#U+2764; You'},
+      { src: '/codebaseBranding/logo/contributeGithub.png',html: 'view on github' },
+      { src: '/codebaseBranding/logo/starProject.png',html: 'star project on github' },
+      { src: '/codebaseBranding/logo/buyCoffee.png',html: 'get on microsoft store' },
     ]);
 
     // Create the second footer section
-    const footerSection2 = createFooterSection('Section 2', [
-      { tag: 'h4', text: 'Contacts' },
-      { tag: 'p', text: 'mobile: +254790405421' },
-      { tag: 'p', text: 'email: victorkithinji@outlook.com' },
+    const footerSection2 = createFooterSection('Contacts', [
+      { tag: 'p', html: 'mobile: +254790405421' },
+      { tag: 'p', html: 'email 1: (collaboration): victorkithinji@outlook.com' },
+      { tag: 'p', html: 'email 2: (feedback): markkithinji469@gmail.com' },
     ]);
 
     // Create the third footer section
-    const footerSection3 = createFooterSection('Section 3', [
-      { tag: 'h4', text: 'More from CodeBase Studio' },
+    const footerSection3 = createFooterSection('Other Products', [
+      { tag: 'p', html: 'More from CodeBase Studio' },
       {
         tag: 'p',
-        html: 'visit: <a href="https://github.com/VictorCodebase">VictorCodebase studio</a>',
+        html: 'visit: <a href="https://markkithinji469.wixsite.com/victorcodebase">VictorCodebase studio</a>',
       },
       {
         tag: 'p',
-        html: 'productivity tools: <a href="#">VictorCodebase - windows</a>',
+        html: 'productivity tools: <a href="https://markkithinji469.wixsite.com/victorcodebase">VictorCodebase - windows</a>',
       },
       {
         tag: 'p',
-        html: 'mobile games: <a href="#">VictorCodebase - games</a>',
+        html: 'mobile games: <a href="https://markkithinji469.wixsite.com/victorcodebase">VictorCodebase - games</a>',
       },
     ]);
 
@@ -126,6 +127,7 @@ function constructFooter(){
 
       // Create a title for the section
       const titleElement = document.createElement('div');
+      titleElement.classList.add('footer-section-title');
       titleElement.textContent = title;
       footerSection.appendChild(titleElement);
 

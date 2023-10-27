@@ -11,7 +11,7 @@ function playVideo(title){
 //!
 
 //document.getElementById('video-grid').appendChild('div');
-fetch('/api/video_list')
+fetch('/api/video_list') //TODO: use a promise approach to ensure all thumbnails needing to be generated are generated before the page loads
     .then(response => response.json())
     .then(videolist => {
         videolist.forEach(videotitle => {
@@ -20,7 +20,9 @@ fetch('/api/video_list')
 
             const videoImage = document.createElement('img');
             const thumbnailLocation = `${videotitle.split('.')[0]}_thumbnail.jpg`
+
             videoImage.src = `/api/thumbnail/${thumbnailLocation}`; // Adjust the path to your thumbnails
+            console.log(videoImage.src)
             const linkToScreen = document.createElement('a')
             linkToScreen.href = '#videoPlayer'
 
