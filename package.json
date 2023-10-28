@@ -6,6 +6,10 @@
   "scripts": {
     "start": "nodemon app.js"
   },
+  "dependencies": {
+    "express": "^4.17.1",
+    "ws": "^8.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/VictorCodebase/multi-viewer.git"

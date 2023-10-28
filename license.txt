@@ -1,0 +1,19 @@
+Proprietary Software License
+
+1. License Grant: The licensor grants the licensee a non-exclusive, non-transferable license to use the software for personal or internal business purposes.
+
+2. Restrictions: The licensee shall not copy, modify, distribute, reverse engineer, or attempt to discover the source code of the software.
+
+3. Copyright: The software is protected by copyright. All rights are reserved by the licensor.
+
+4. Liability: The licensor disclaims any liability for damages or losses resulting from the use of the software.
+
+5. Termination: The license may be terminated if the licensee violates any terms of this license.
+
+6. License Fee: This license is provided free of charge.
+
+7. Duration: This license is valid for a period of 2 years.
+
+By using the software, the licensee agrees to the terms and conditions of this license.
+
+VictorCodebase - All Rights Reserved
