@@ -7,7 +7,7 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "ws": "^8.6.0"
   },
   "repository": {
@@ -15,7 +15,6 @@
     "url": "git+https://github.com/VictorCodebase/multi-viewer.git"
   },
   "author": "Mark Victor Kithinji",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/VictorCodebase/multi-viewer/issues"
   },
