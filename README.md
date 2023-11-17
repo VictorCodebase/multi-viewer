@@ -30,13 +30,25 @@ I welcome contributions to make Multi-Viewer more robust and modular. If you hav
 
 # Screen Recording
 Multi-Viewer in action:
+On PC:
 
-https://github.com/VictorCodebase/multi-viewer/assets/135356007/83db193f-9f76-433a-9ad8-b7ffd44677fa  
+https://github.com/VictorCodebase/multi-viewer/assets/135356007/f05dbeee-4726-479a-bf04-550b4207d6e0
+
+On mobile:
+
+
+
+
+https://github.com/VictorCodebase/multi-viewer/assets/135356007/fd0d15ad-bf73-480a-8c07-6c6ff99be2e5
+
+
 
 # Screenshots
 
 
 ![image](https://github.com/VictorCodebase/multi-viewer/assets/135356007/75c43c15-3b63-4a28-8077-147e83660374)
+
+![Multiviwer on mobile](https://github.com/VictorCodebase/multi-viewer/assets/135356007/56370756-a4b8-45b2-a16b-a5173094129e)
 
 ![image](https://github.com/VictorCodebase/multi-viewer/assets/135356007/dccb4328-9d33-422d-919e-c4f2c91b7ad5)
 
