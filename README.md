@@ -1,23 +1,34 @@
 
-https://github.com/VictorCodebase/multi-viewer/assets/135356007/83db193f-9f76-433a-9ad8-b7ffd44677fa
-Hey guys👊🏽
-
-feel free to contribute to multi-viewer.
-This is a platform that allows multiple devices to stream media in one device simultaneously, saving storage issues
-
-I'd have loved the code to be more modular but I made it in a rush out of need, just to get the basic part running. Feel free to make it more modular💖
-
-## screen recording
 
 
+# Introduction  
 
-https://github.com/VictorCodebase/multi-viewer/assets/135356007/bfea5252-f275-4bcb-aa51-64a94a472ed5
+Hey there! 👋 This is Multi-Viewer, a project born out of the necessity for a quick solution to stream media from multiple devices to a single platform, eliminating storage challenges. While the current code may lack modularity since it was developed quickly to meet demand, I invite you to contribute and enhance its modular structure. Your input is valuable in making Multi-Viewer even better! 💖
+
+# Features  
+
+Stream media from multiple devices to a single platform.
+Address storage issues associated with media streaming.  
+
+# Getting Started
+To get started with Multi-Viewer, follow these simple steps:
+
+ - Clone the repository: git clone https://github.com/VictorCodebase/multi-viewer.git  
+ - Install dependencies: npm install 
+ - Run the application: npm start 
+ - Feel free to explore and customize the code to suit your needs. 
 
 
+# Contributing  
 
-https://github.com/VictorCodebase/multi-viewer/assets/135356007/39897f92-113b-432c-a6a3-7fbb5b41f0f7
+I welcome contributions to make Multi-Viewer more robust and modular. If you have ideas for improvements, bug fixes, or additional features, feel free to open an issue or submit a pull request. 
 
+Screen Recording
+Multi-Viewer in action:
 
+https://github.com/VictorCodebase/multi-viewer/assets/135356007/83db193f-9f76-433a-9ad8-b7ffd44677fa  
+
+Screenshots
 
 
 
