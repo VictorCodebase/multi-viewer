@@ -5,13 +5,14 @@ videoTitle = "default"
 function playVideo(title){
     console.log("title")
 }
-videoPlayer.src = `/api/stream/Multiview default video.mp4` // this is the default video
+videoPlayer.src = ``
 
 
 //!
 
 //document.getElementById('video-grid').appendChild('div');
-fetch('/api/video_list') //TODO: use a promise approach to ensure all thumbnails needing to be generated are generated before the page loads
+fetch('/api/video_list') 
+    //promise chain
     .then(response => response.json())
     .then(videolist => {
         if (videolist.length === 0){
@@ -19,7 +20,7 @@ fetch('/api/video_list') //TODO: use a promise approach to ensure all thumbnails
             return
         }
         else if (videolist.length ==  1 && videolist[0] == 'Multiview default video.mp4'){
-            videoPlayer.style.display = "block"
+            //videoPlayer.style.display = "block"
             videoPlayer.src = `/api/stream/Multiview default video.mp4`
             return
         }

@@ -3,6 +3,7 @@ const app = express();
 const fs = require('fs');
 const http = require('http');
 const path = require('path');
+//const Jimp = require('jimp');
 const { exec } = require('child_process');
 const { stderr, title } = require('process');
 
@@ -53,6 +54,7 @@ app.get('/api/thumbnail/:thumbnail', (req, res) => {
     //TODO: check if thumbnails exist for all videos and dispose excess thumbnails
     const thumbnail = req.params.thumbnail
     const thumbnailPath = path.resolve(path.join(thumbnailFolder, thumbnail))
+    console.log("CHECK THUMBNAIL EXISTANCE THUMBNAIL PATH",thumbnailPath)
     res.sendFile(thumbnailPath, async (err)  => {
 
         if(err){
@@ -86,15 +88,18 @@ function checkThumbnails(){
     return new Promise((resolve, reject) => {
         fs.readdir(videoFolder, (err, files) => {
             if(err){
-                console.log(err)
+                console.log("CHECK THUMBNAILS ABORTED WHILE READING VIDEO FOLDER...", "\n", err)
+                reject(false)
             }
+            
             files.forEach(file => {
                 file = file.split('.')[0]
                 videoTitles.add(file)
             });
             fs.readdir(thumbnailFolder, (err, titles) => {
                 if(err){
-                    console.log(err)
+                    console.log("CHECK THUMBNAILS ABORTED WHILE READING THUMBNAIL FOLDER...","\n",err)
+                    reject(false)
                 }
                 titles.forEach(title => {
                     console.log(title)
@@ -105,18 +110,23 @@ function checkThumbnails(){
             })
 
             videosWithoutThumbnails = [...videoTitles].filter(x => !videoThumbnails.has(x))
-            console.log("No thumbnails", videosWithoutThumbnails)
+            console.log("Videos with no corresponding thumbnails found: ", videosWithoutThumbnails)
             thumbnailsWithNoVideos = [...videoThumbnails].filter(x => !videoTitles.has(x))
             console.log(thumbnailsWithNoVideos)
 
             if (videosWithoutThumbnails.length > 0){
-                console.log('adding thumbnails')
+                console.log('ADDING THUMBNAILS...')
                 if(addThumbnails(videosWithoutThumbnails)){
+                    console.log('THUMBNAILS ADDED SUCCESSFULLY...')
                     errorSolved = true
+                }
+                else{
+                    console.log('ERROR ADDING THUMBNAILS...')
+                    errorSolved = false
                 }
             }
             if (thumbnailsWithNoVideos.length > 0){
-                console.log('deleting unrelated thumbnails')
+                console.log('THUMBNAILS WITH NO VIDEOS FOUND...')
                 deleteThumbnails(thumbnailsWithNoVideos)
             }        
         })
@@ -130,9 +140,11 @@ function checkThumbnails(){
 }
 
 function deleteThumbnails(thumbnails){
+    console.log("DELETING EXCESS THUMBNAILS...")
     thumbnails.forEach(thumbnail => {
         fs.unlink(thumbnail, (err) => {
             if(err){
+                console.log(`error deleting ${thumbnail}`)
                 console.log(err)
             }
             else{
@@ -147,6 +159,8 @@ function addThumbnails(videos){
         const videoPath = `${videoFolder}/${video}.mp4`;
         const thumbnailPath = `${thumbnailFolder}/${video}_thumbnail.jpg`;
         const command = `ffmpeg -i "${videoPath}" -ss 00:00:05 -vframes 1 "${thumbnailPath}"`;
+        //const command = 'ffmpeg -i "./videos/Far Cry ® New Dawn 2022-12-07 18-05-48.mp4" -ss 00:00:05 -vframes 1 "./thumbnails/Far Cry ® New Dawn 2022-12-07 18-05-48_thumbnail.jpg"'
+        console.log("VIDEOPATH: ", videoPath), console.log("THUMBNAILPATH: ", thumbnailPath)
         
         exec(command, (error, stdout, stderr) => {
             if (error){
@@ -168,7 +182,7 @@ function generateThumbnails(videos){
         files.forEach(file =>{
             if(file.endsWith('.mp4')){
                 const videoPath = `${videoFolder}/${file}`;
-                const thumbnailPath = `${videoFolder}/${file.replace('.mp4', '_thumbnail.jpg')}`;
+                const thumbnailPath = `(${videoFolder}/${file.replace('.mp4', '_thumbnail.jpg')})`;
                 const command = `ffmpeg -i "${videoPath}" -ss 00:00:05 -vframes 1 "${thumbnailPath}"`;
                 
                 exec(command, (error, stdout, stderr) => {
@@ -201,7 +215,6 @@ app.get('/api/stream/:video', (req, res) => {
         const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
 
         if (isNaN(start) || isNaN(end)) {
-            // Invalid range values, send an appropriate response (e.g., 416 Range Not Satisfiable).
             res.status(416).send('Range Not Satisfiable');
         } else {
             const chunkSize = (end - start) + 1;
@@ -234,6 +247,7 @@ app.get('/', (req, res) => {
 
 
 // Listen on port 3000
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
+port = 3000
+app.listen(port, () => {
+  console.log('Server running on port', port );
 });

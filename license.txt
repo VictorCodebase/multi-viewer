@@ -16,4 +16,4 @@ Proprietary Software License
 
 By using the software, the licensee agrees to the terms and conditions of this license.
 
-VictorCodebase - All Rights Reserved
+VictorCodebase(Mark Victor Kithinji) - All Rights Reserved
