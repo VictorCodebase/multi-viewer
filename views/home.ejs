@@ -6,12 +6,13 @@
     <link rel="shortcut icon" href="/images/panda-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="/styling/style.css">
     <link rel="stylesheet" href="/codebaseBranding/brand.css">
-    <title>Multi-Viewer</title>
+    <script type="module" src="/codebaseBranding/brand.js"></script>
+    <title> <%= title %></title>
 </head>
 <body>
     <header></header>
     <main>
-        <div class="display-screen">
+        <div id="display-screen">
             <video id="videoPlayer" controls autoplay></video>
         </div> 
         <div class="other-videos centered">
@@ -20,10 +21,6 @@
     </main>
     <footer></footer>
 
-
-
-
 <script src="/functionality/func.js"></script>
-<script src="/codebaseBranding/brand.js"></script>
 </body>
 </html>

@@ -2,24 +2,30 @@ a {
   text-decoration: underline;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 header {
-  border-radius: 20px;
   position: relative;
   width: 100vw;
-  height: 70px;
+  height: 100px;
   min-width: 500px;
+  left: 0;
   background-color: #000000;
-  color: #ffffff;
+  color: #dcdbdb;
   padding: 20px;
   display: flex;
   flex-direction: row;
   margin-bottom: 50px;
 }
 header a {
-  color: #ac9292;
+  color: #c3a3a3;
 }
 header #logoContainer {
   left: 0;
+  margin-top: auto;
+  margin-bottom: auto;
   width: 25%;
   display: block;
 }
@@ -33,13 +39,12 @@ header #logoContainer img {
 }
 header #logoContainer .logoImg {
   border-radius: 20px;
-  border: solid white 1px;
+  border: solid #dcdbdb 1px;
   cursor: pointer;
+  background-color: rgb(0, 0, 0);
   left: 0rem;
-  top: -0.5rem;
   height: 90px;
   position: relative;
-  /* make the image fit */
   -o-object-fit: contain;
      object-fit: contain;
   overflow: hidden;
@@ -51,10 +56,9 @@ header #logoContainer .logoImgMobile {
   border-radius: 20px;
   position: relative;
   margin: auto;
-  border: solid white 1px;
+  border: solid #dcdbdb 1px;
   /* make the image fit */
   overflow: hidden;
-  border: solid white 1px;
 }
 header #title {
   width: 50%;
@@ -77,16 +81,21 @@ header #menu #hamburgerMenuContainer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   width: 40px;
   height: 40px;
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 15vw;
-  background-color: #ffffff;
+  background-color: #000000;
+}
+header #menu #hamburgerMenuContainer .hamburgerMenuEl {
+  width: 30px;
+  height: 3px;
+  background-color: #dcdbdb;
+  margin-bottom: 5px;
 }
 
-/* ? title */
-/* ? menu */
 footer {
   border-radius: 10px;
   left: 0;
@@ -96,11 +105,11 @@ footer {
   width: 100vw;
   margin-top: 200px;
   background-color: #000000;
-  color: #ffffff;
+  color: #dcdbdb;
   padding-top: 20px;
 }
 footer a {
-  color: #ac9292;
+  color: #c3a3a3;
 }
 footer .rows {
   display: flex;
@@ -135,7 +144,7 @@ footer .footer-section img {
      object-fit: contain;
   overflow: hidden;
   margin-bottom: 10px;
-  border: solid #ac9292 1px;
+  border: solid #c3a3a3 1px;
   border-radius: 10px;
 }
 footer .footer-section .footer-section-title {
@@ -146,44 +155,29 @@ footer .footer-section .footer-section-title {
 }
 footer .footer-section .footerbase {
   left: 0;
-  border-top: solid #ffffff 1px;
+  border-top: solid #dcdbdb 1px;
 }
 
 /* small screen */
 @media screen and (max-width: 700px) {
   .rows {
-    flex-direction: column;
+    display: block;
   }
   .display-screen {
     height: 25vh;
   }
   header {
+    display: flex;
     flex-direction: column;
     padding: 0;
-    width: 100vw;
+    width: 90vw;
+    height: 100px;
     height: 100;
     min-width: 100%;
     padding-bottom: 0;
     margin-bottom: 10px;
   }
-  #logo {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #title {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-  }
-  #logoContainer {
+  header #logoContainer {
     width: 100vw;
     min-width: none;
     margin: auto;
@@ -193,8 +187,38 @@ footer .footer-section .footerbase {
     align-items: center;
     justify-content: center;
   }
+  header #logoContainer #logo {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  header #title {
+    font-size: smaller;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  header #title div {
+    font-size: 20px;
+  }
+  header #menu {
+    position: absolute;
+    left: 65%;
+    min-width: none;
+    margin: auto;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .footer-section {
-    width: 80%;
+    width: 300px;
+    border: solid red 1px;
   }
   .logoImg {
     left: 0;

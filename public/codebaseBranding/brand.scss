@@ -1,238 +1,247 @@
 //CodeBase Branding
 
 $primary-color: #000000;
-$secondary-color: #ffffff;
-$tertiary-color: #ac9292;
+$secondary-color: #dcdbdb;
+$tertiary-color: #c3a3a3;
 $border-radius: 20px;
 
-$font-family: 'Times New Roman', sans-serif;
+$font-family: "Times New Roman", sans-serif;
 
-a{
-    text-decoration: underline;
+a {
+	text-decoration: underline;
+}
+html {
+	//remove scroll along the x axis
+	overflow-x: hidden;
 }
 
-header{
-    a {
-        color: $tertiary-color;
-    }
-    border-radius: $border-radius;
-    position: relative;
-    width: 100vw;
-    height: 70px;
-    min-width: 500px;
-    background-color: $primary-color;
-    color: $secondary-color;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 50px;
+header {
+	a {
+		color: $tertiary-color;
+	}
+	position: relative;
+	width: 100vw;
+	height: 100px;
+	min-width: 500px;
+	left: 0;
+	background-color: $primary-color;
+	color: $secondary-color;
+	padding: 20px;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 50px;
 
-    #logoContainer{
-        left: 0;
-        width: 25%;
-        display: block;
-        img{
-            height: 100%;
-            width: 100%;
-            position: relative;
-            object-fit: contain;
-            overflow: hidden;
-        } 
+	#logoContainer {
+		left: 0;
+		margin-top: auto;
+		margin-bottom: auto;
+		width: 25%;
+		display: block;
+		img {
+			height: 100%;
+			width: 100%;
+			position: relative;
+			object-fit: contain;
+			overflow: hidden;
+		}
 
-        .logoImg{
-            border-radius: $border-radius;
-            border: solid white 1px;
-            cursor: pointer;
-            left: 0rem;
-            top: -0.5rem;
-            height: 90px;
-            position: relative;
-            /* make the image fit */
-            object-fit: contain;
-            overflow: hidden;
-        }
-        
-        .logoImgMobile{
-            cursor: pointer;
-            height: 50px;
-            width: 50px;
-            border-radius: $border-radius;
-            position: relative;
-            margin: auto;
-            border: solid white 1px;
-            /* make the image fit */
-            overflow: hidden;
-            border: solid white 1px;
-        }
+		.logoImg {
+			border-radius: $border-radius;
+			border: solid $secondary-color 1px;
+			cursor: pointer;
+			//This background color must always match logo
+			background-color: rgb(0, 0, 0);
+			left: 0rem;
+			height: 90px;
+			position: relative;
+			object-fit: contain;
+			overflow: hidden;
+		}
 
-    }
+		.logoImgMobile {
+			cursor: pointer;
+			height: 50px;
+			width: 50px;
+			border-radius: $border-radius;
+			position: relative;
+			margin: auto;
+			border: solid $secondary-color 1px;
+			/* make the image fit */
+			overflow: hidden;
+		}
+	}
 
+	#title {
+		width: 50%;
+		height: 100%;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 35px;
+		font-family: $font-family;
+	}
 
-    #title{
-        width: 50%;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 35px;
-        font-family: $font-family;
-    }
+	#menu {
+		width: 25%;
+		display: flex;
+		margin: 0 auto;
+		justify-content: start;
 
+		#hamburgerMenuContainer {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
 
-    #menu{
-        width: 25%;
-        display: flex;
-        margin: 0 auto;
-        justify-content: start;
-        
-        #hamburgerMenuContainer{
-        display: flex; 
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+			width: 40px;
+			height: 40px;
+			margin-top: auto;
+			margin-bottom: auto;
+			margin-left: 15vw;
+			background-color: $primary-color;
 
-        width: 40px;
-        height: 40px;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin-left: 15vw;
-        background-color: $secondary-color;
-        }
-    }
-    
-   
+			.hamburgerMenuEl {
+				width: 30px;
+				height: 3px;
+				background-color: $secondary-color;
+				margin-bottom: 5px;
+			}
+		}
+
+		
+	}
 }
 
+footer {
+	a {
+		color: $tertiary-color;
+	}
+	border-radius: 10px;
+	left: 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	margin-top: 200px;
+	background-color: $primary-color;
+	color: $secondary-color;
+	padding-top: 20px;
+	.rows {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		margin: 0 auto;
+	}
+	.footer-section {
+		width: 25%;
+		margin: 0 auto;
+		text-align: center;
+		min-height: 200px;
+		max-height: fit-content;
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+		p {
+			.footer-section {
+				font-size: 15px;
+			}
+			font-family: $font-family;
+			margin-bottom: 7px;
+		}
 
+		img {
+			cursor: pointer;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+			overflow: hidden;
+			margin-bottom: 10px;
+			border: solid $tertiary-color 1px;
+			border-radius: 10px;
+		}
+		.footer-section-title {
+			font-size: 20px;
+			font-weight: bold;
+			font-family: $font-family;
+			margin-bottom: 10px;
+		}
 
-
-
-
-
-/* ? title */
-
-
-/* ? menu */
-
-
-
-
-footer{
-    a {
-        color: $tertiary-color;
-    }
-    border-radius: 10px;
-    left: 0;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    margin-top: 200px;
-    background-color: #000000;
-    color: $secondary-color;
-    padding-top: 20px;
-    .rows{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        margin: 0 auto;
-    }
-    .footer-section{
-        width: 25%;
-        margin: 0 auto;
-        text-align: center;
-        min-height: 200px;
-        max-height: fit-content;
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        p{
-            .footer-section {
-                font-size: 15px;
-            }
-            font-family: $font-family;
-            margin-bottom: 7px;
-        }
-    
-        img{
-            cursor: pointer;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            overflow: hidden;
-            margin-bottom: 10px;
-            border: solid $tertiary-color 1px;
-            border-radius: 10px;
-        }
-        .footer-section-title{
-            font-size: 20px;
-            font-weight: bold;
-            font-family: $font-family;
-            margin-bottom: 10px;
-        }
-        
-        .footerbase{
-            left: 0;
-            border-top: solid $secondary-color 1px;
-        }
-    }
+		.footerbase {
+			left: 0;
+			border-top: solid $secondary-color 1px;
+		}
+	}
 }
-
-
-
-
 
 /* small screen */
 
-@media screen and (max-width:700px){
-    .rows{
-        flex-direction: column;
-    }
-    .display-screen{
-        height: 25vh;
-    }
-    header{
-        flex-direction: column;
-        padding: 0;
-        width: 100vw;
-        height: 100;
-        min-width: 100%;
-        padding-bottom: 0;
-        margin-bottom: 10px;
-    }
-    #logo{
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    #title{
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 15px;
-    }
-    #logoContainer{
-        width: 100vw;
-        min-width: none;
-        margin: auto;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .footer-section{
-        width: 80%;
-    }
-    .logoImg{
-        left: 0;
-    }
+@media screen and (max-width: 700px) {
+	.rows {
+		display: block;
+	}
+	.display-screen {
+		height: 25vh;
+	}
+	header {
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		width: 90vw;
+		height: 100px;
+		height: 100;
+		min-width: 100%;
+		padding-bottom: 0;
+		margin-bottom: 10px;
+
+		#logoContainer {
+			width: 100vw;
+			min-width: none;
+			margin: auto;
+			height: 100%;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			#logo {
+				width: 100%;
+				height: 100%;
+				margin: 0 auto;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+		#title {
+			font-size: smaller;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			div {
+				font-size: 20px;
+			}
+		}
+		#menu {
+			position: absolute;
+			left: 65%;
+			min-width: none;
+			margin: auto;
+			height: 100%;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	.footer-section {
+		width: 300px;
+		border: solid red 1px;
+	}
+	.logoImg {
+		left: 0;
+	}
 }

@@ -1,25 +1,23 @@
 {
-  "name": "multiviewer",
-  "version": "1.0.0",
-  "description": "Watch videos as a party",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon app.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "ws": "^8.6.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VictorCodebase/multi-viewer.git"
-  },
-  "engines":{
-    "node": "20.5.0"
-  },
-  "author": "Mark Victor Kithinji",
-  "bugs": {
-    "url": "https://github.com/VictorCodebase/multi-viewer/issues"
-  },
-  "homepage": "https://github.com/VictorCodebase/multi-viewer#readme"
+	"name": "multiviewer4.0.4",
+	"version": "4.0.4",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon app.js"
+	},
+	"author": "Mark Victor Kithinji",
+	"license": "ISC",
+	"dependencies": {
+		"express-fileupload": "^1.4.3",
+		"express": "^4.18.2",
+		"gm": "^1.25.0",
+		"jimp": "^0.22.10",
+		"mongoose": "^8.0.3",
+		"network": "^0.6.1",
+		"qrcode": "^1.5.3",
+		"sharp": "^0.33.1",
+		"uuid": "^9.0.1",
+		"ws": "^8.15.1"
+	}
 }
